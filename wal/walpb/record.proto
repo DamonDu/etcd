@@ -1,6 +1,7 @@
 syntax = "proto2";
 package walpb;
 
+// DAMON: 使用 gogoproto
 import "gogoproto/gogo.proto";
 
 option (gogoproto.marshaler_all) = true;

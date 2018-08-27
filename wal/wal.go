@@ -119,6 +119,7 @@ func Create(lg *zap.Logger, dirpath string, metadata []byte) (*WAL, error) {
 	}
 
 	p := filepath.Join(tmpdirpath, walName(0, 0))
+	// DAMON: 使用文件锁保证原子性 [见：/pkg/fileutil/lock_linux.go] [锁还有什么其他实现方式？对比优劣]
 	f, err := fileutil.LockFile(p, os.O_WRONLY|os.O_CREATE, fileutil.PrivateFileMode)
 	if err != nil {
 		if lg != nil {
